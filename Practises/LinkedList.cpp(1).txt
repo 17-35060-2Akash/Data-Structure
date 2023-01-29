@@ -1,0 +1,127 @@
+#include <iostream>
+using namespace std;
+
+struct node
+{
+    int data;
+    node *next;
+};
+node *list, *nptr, *tptr;
+
+node* createNewNode(int dataItem)
+{
+    node *ptr  = new node;
+    ptr->data= dataItem;
+    ptr->next= NULL;
+
+    return ptr;
+}
+
+void createLink(node *ptr)
+{
+    if(list==NULL)
+    {
+        list = ptr;
+        tptr = ptr;
+    }
+    else{
+        tptr->next= ptr;
+        tptr = ptr;
+    }
+}
+
+void printList()
+{
+    tptr = list;
+
+    while(tptr!=NULL)
+    {
+        cout<<tptr->data<<" ";
+        tptr = tptr->next;
+    }
+    cout<<endl;
+}
+
+void insertFirst(node* ptr)
+{
+    ptr->next = list;
+    list= ptr;
+}
+
+void insertAt(int position, node* ptr)
+{
+    tptr = list;
+    int i;
+    for(i=1;i<position-1;i++)
+    {
+        tptr= tptr->next;
+    }
+
+    ptr->next = tptr->next;
+    tptr->next= ptr;
+
+}
+
+void insertAfter(int value, node* ptr)
+{
+    tptr = list;
+    while(tptr->data!=value)
+    {
+        tptr= tptr->next;
+    }
+
+    ptr->next = tptr->next;
+    tptr->next= ptr;
+
+}
+
+void deleteFromFirst()
+{
+    node * ptr;
+    ptr = list;
+    tptr = list->next;
+    delete ptr;
+    list= tptr;
+
+}
+
+void deleteFromLast()
+{
+    node *ptr;
+    tptr = list;
+
+    while(tptr->next->next!=NULL)
+        tptr = tptr->next;
+    cout<<"\ndeleting :"<<tptr->next->data;
+    ptr = tptr->next;
+    tptr->next=NULL;
+    delete ptr;
+}
+int main()
+{
+    list = NULL;
+    int i;
+    for(i=0;i<5;i++)
+    {
+
+        nptr = createNewNode(i);
+        createLink(nptr);
+    }
+    printList();
+
+    //nptr = createNewNode(-5);
+    //insertFirst(nptr);
+    //printList();
+//    nptr = createNewNode(-10);
+//    insertAt(2,nptr);
+//    printList();
+//    nptr = createNewNode(-10);
+//    insertAfter(2,nptr);
+//    printList();
+//    deleteFromFirst();
+//    printList();
+    deleteFromLast();
+    printList();
+
+    return 0;
+}

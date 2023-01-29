@@ -1,0 +1,77 @@
+#include <iostream>
+using namespace std;
+
+struct playerStruct
+{
+    string name;
+    string country;
+    int runsInInnings[7]={};
+    int highestRun=0;
+    int averageRun=0;
+};
+
+void setAllPlayerInfo(struct playerStruct player[], int size)
+{
+    player[0].name = "Sakib Al Hasan";
+    player[0].country = "Bangladesh";
+    player[0].runsInInnings[0]= 10;
+    player[0].runsInInnings[1]= 50;
+    player[0].runsInInnings[2]= 0;
+    player[0].runsInInnings[3]= 80;
+    player[0].runsInInnings[4]= 140;
+    player[0].runsInInnings[5]= 10;
+    player[0].runsInInnings[6]= 35;
+
+    player[1].name = "Tamim Iqbal";
+    player[1].country = "Bangladesh";
+    player[1].runsInInnings[0]= 0;
+    player[1].runsInInnings[1]= 40;
+    player[1].runsInInnings[2]= 37;
+    player[1].runsInInnings[3]= 45;
+    player[1].runsInInnings[4]= 123;
+    player[1].runsInInnings[5]= 35;
+    player[1].runsInInnings[6]= 25;
+}
+void displayAllPlayerInfo(struct playerStruct pl[], int size)
+{
+    int i, j;
+    for(i=0;i<size;i++)
+    {
+        cout<<"Player info: "<<i+1<<endl;
+        cout<<"--------------------------"<<endl;
+        cout<<"Name: "<<pl[i].name<<endl<<"Country: "<<pl[i].country<<endl;
+        cout<<"Runs: ";
+        for(j=0;j<7;j++)
+        {
+            cout<<pl[i].runsInInnings[j]<<", ";
+        }
+        cout<<"\n"<<"Highest Run: "<<pl[i].highestRun<<endl;
+        cout<<"Average Run: "<<pl[i].averageRun<<endl<<endl;
+    }
+}
+
+void calculateHighestRun(struct playerStruct player[], int size)
+{
+    int i,j;
+    for(i=0; i<size;i++)
+    {
+       int highestRun = player[i].runsInInnings[0];
+
+        for(j=1;j<7;j++)
+        {
+            if(player[i].runsInInnings[j]> highestRun)
+                highestRun = player[i].runsInInnings[j];
+        }
+        player[i].highestRun = highestRun;
+    }
+    displayAllPlayerInfo(player, size);
+
+}
+
+int main()
+{
+    playerStruct player[2];
+    setAllPlayerInfo(player, 2);
+    displayAllPlayerInfo(player, 2);
+    calculateHighestRun(player, 2);
+}

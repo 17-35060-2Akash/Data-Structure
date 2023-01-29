@@ -1,0 +1,46 @@
+#include<iostream>
+using namespace std;
+#define limit 10
+
+int stack[limit], top=0;
+
+void push(int value)
+{
+    if(top<limit)
+    {
+        stack[top]=value;
+        top++;
+    }
+    else
+    {
+        cout<<"Stack Over Flowed\n";
+    }
+}
+
+void pop()
+{
+    if(top<0)
+    {
+        cout<<"Stack is empty\n";
+    }
+    else
+    {
+        top--;
+        cout<<stack[top]<<" ";
+    }
+}
+
+int main()
+{
+    push(10);
+    push(20);
+    push(30);
+    pop();
+    pop();
+    pop();
+    pop();
+    pop();
+    return 0;
+}
+
+
